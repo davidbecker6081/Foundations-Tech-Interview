@@ -35,3 +35,20 @@ const outputNameAge = (sortedArray) => {
 }
 
 outputNameAge(ascendingAge(data))
+
+
+const ageHash = (sortedArray) => {
+	const hashMap = new Map()
+
+	for (let i = 0; i < sortedArray.length; i++) {
+		if (hashMap.has(sortedArray[i][1])) {
+			hashMap.set(sortedArray[i][1], [...hashMap.get(sortedArray[i][1]), sortedArray[i][0]])
+		} else {
+			hashMap.set(sortedArray[i][1], [sortedArray[i][0]])
+		}
+	}
+	
+	return hashMap
+}
+
+ageHash(ascendingAge(data))
