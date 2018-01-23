@@ -41,13 +41,10 @@ const ageHash = (sortedArray) => {
 	const hashMap = new Map()
 
 	for (let i = 0; i < sortedArray.length; i++) {
-		if (hashMap.has(sortedArray[i][1])) {
-			hashMap.set(sortedArray[i][1], [...hashMap.get(sortedArray[i][1]), sortedArray[i][0]])
-		} else {
-			hashMap.set(sortedArray[i][1], [sortedArray[i][0]])
-		}
+		const current = hashMap.get(sortedArray[i][1]) || []
+		hashMap.set(sortedArray[i][1], [...current, sortedArray[i][0]])
 	}
-	
+
 	return hashMap
 }
 
