@@ -24,4 +24,14 @@ const ascendingAge = (people) => {
 	}
 
 	outputName(arrayToOrder)
+  return arrayToOrder
 }
+
+
+const outputNameAge = (sortedArray) => {
+	for (let h = 0; h < sortedArray.length; h++) {
+		console.log(`${sortedArray[h][0]} (${sortedArray[h][1]})`)
+	}
+}
+
+outputNameAge(ascendingAge(data))
