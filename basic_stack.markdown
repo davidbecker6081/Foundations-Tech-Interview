@@ -2,7 +2,7 @@
 
 A stack is a LIFO (last-in, first-out) data structure. The
 core operations are `push` which adds an element to the stack
-and `pop` with removes the top element of the stack.
+and `pop` which removes the top element of the stack.
 
 ## Challenge
 
