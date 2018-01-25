@@ -68,7 +68,7 @@ const capitals = {
 
 
 const outputCapital = (state) => {
-	return capitals[state]
+	return capitals[state] ? capitals[state] : 'Unknown'
 }
 
 outputCapital('OR')
