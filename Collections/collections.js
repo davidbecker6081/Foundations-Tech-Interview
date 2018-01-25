@@ -49,3 +49,26 @@ const ageHash = (sortedArray) => {
 }
 
 ageHash(ascendingAge(data))
+
+// State Capitals
+
+const states = {
+	"Oregon": "OR",
+  "Alabama": "AL",
+  "New Jersey": "NJ",
+  "Colorado": "CO"
+}
+
+const capitals = {
+	"OR": "Salem",
+  "AL": "Montgomery",
+  "NJ": "Trenton",
+  "CO": "Denver"
+}
+
+
+const outputCapital = (state) => {
+	return capitals[state]
+}
+
+outputCapital('OR')
