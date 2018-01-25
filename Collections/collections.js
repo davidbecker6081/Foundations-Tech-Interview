@@ -68,7 +68,31 @@ const capitals = {
 
 
 const outputCapital = (state) => {
-	return capitals[state] ? capitals[state] : 'Unknown'
+	const stateAbbr = states[state]
+	return capitals[stateAbbr] ? capitals[stateAbbr] : 'Unknown'
 }
 
 outputCapital('OR')
+
+const outputState = (capitalToSearch) => {
+	const stateKeys = Object.keys(capitals)
+	let stateAbbr
+
+	for (let key of stateKeys) {
+		if (capitals[key] === capitalToSearch) {
+			stateAbbr = key
+		}
+	}
+
+	const stateNameKeys = Object.keys(states)
+	let state
+
+	for (let key of stateNameKeys) {
+		if (states[key] === stateAbbr) {
+			state = states[key]
+		}
+	}
+	return state
+}
+
+outputState('Denver')
