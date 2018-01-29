@@ -96,3 +96,15 @@ const outputState = (capitalToSearch) => {
 }
 
 outputState('Denver')
+
+// Scrabble Scoring
+
+const outputScore = (word) => {
+	if (!Array.isArray(word)) {
+		word = [...word]
+	}
+	return word.reduce((score, letter) => {
+			score += scores[letter.toUpperCase()]
+		return score
+	}, 0)
+}
