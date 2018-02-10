@@ -12,7 +12,7 @@ const radixSort = (array) => {
 		9: []
 	}
 
-	const largesNum = findLargestNumber(array)
+	const largestNumDigits = findLargestNumber(array).length
 
 }
 
