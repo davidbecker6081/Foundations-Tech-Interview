@@ -9,18 +9,49 @@ const unloadBucketsReset = (buckets) => {
   const newArray = []
   // for loop 10 times, checking size of buckets
   for (let i = 0; i < 10; i++) {
-    if (!buckets[i].length) {
+    if (!buckets[i.toString()].length) {
       continue;
     }
 
-    for (let j = 0; j < buckets[i].length; j++) {
-      newArray.push(buckets[i][j])
+    for (let j = 0; j < buckets[i.toString()].length; j++) {
+      newArray.push(buckets[i.toString()][j])
     }
   }
     // if bucket is empty, continue
     // unload bucket into newArray => FIFO process (push into array)
   return newArray
 }
+
+const loadBuckets = (array, digitsPlace) => {
+	const buckets = {
+  		'0': [],
+  		'1': [],
+  		'2': [],
+  		'3': [],
+  		'4': [],
+  		'5': [],
+  		'6': [],
+  		'7': [],
+  		'8': [],
+  		'9': []
+  	}
+
+  // loop through array - reduce
+  // at each number, place number in bucket by number at digitsPlace
+	return array.reduce((loadedBuckets, num) => {
+		const len = Math.floor( Math.log(num) / Math.LN10 ) - 2;
+		const digit = ((num / Math.pow(10, len)) % 10) | 0
+		console.log('digit:', digit, 'num:', num)
+		if (!digit) {
+			loadedBuckets['0'].push(num)
+		} else {
+			loadedBuckets[digit].push(num)
+		}
+		return loadedBuckets
+	}, buckets)
+}
+
+loadBuckets(toSort, 0)
 
 // first pass
 
@@ -43,19 +74,6 @@ const radixSort = (array, counter) => {
   if (counter !== largestNumDigits) {
   	console.log('counter', counter)
 
-  	const buckets = {
-  		0: [],
-  		1: [],
-  		2: [],
-  		3: [],
-  		4: [],
-  		5: [],
-  		6: [],
-  		7: [],
-  		8: [],
-  		9: []
-  	}
-
     // function to load buckets at index counter
 
     // unloadBucketsReset
@@ -73,4 +91,4 @@ const radixSort = (array, counter) => {
 
 // unload buckets, create new array
 
-radixSort(toSort, 0)
+// radixSort(toSort, 0)
