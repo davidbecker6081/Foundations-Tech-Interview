@@ -7,7 +7,7 @@ const findLargestNumber = (array) => {
 
 const unloadBucketsReset = (buckets) => {
   const newArray = []
-  // for loop 10 times, checking size of buckets
+
   for (let i = 0; i < 10; i++) {
     if (!buckets[i.toString()].length) {
       continue;
@@ -17,8 +17,7 @@ const unloadBucketsReset = (buckets) => {
       newArray.push(buckets[i.toString()][j])
     }
   }
-    // if bucket is empty, continue
-    // unload bucket into newArray => FIFO process (push into array)
+
   return newArray
 }
 
@@ -35,9 +34,6 @@ const loadBuckets = (array, digitsPlace) => {
   		'8': [],
   		'9': []
   	}
-
-  // loop through array - reduce
-  // at each number, place number in bucket by number at digitsPlace
 	return array.reduce((loadedBuckets, num) => {
 		const len = Math.floor( Math.log(num) / Math.LN10 ) - 2;
 		const digit = ((num / Math.pow(10, len)) % 10) | 0
@@ -65,30 +61,19 @@ loadBuckets(toSort, 0)
 
 // [5, 9, 13, 22, 44, 81, 203, 211, 726]
 
-// sorted once process sorts largest digits place
 
 const radixSort = (array, counter) => {
   let largestNumDigits = findLargestNumber(array)
-  console.log(largestNumDigits)
 
   if (counter !== largestNumDigits) {
-  	console.log('counter', counter)
+    const loadedBuckets = loadBuckets(array, counter)
+    const newArray = unloadBucketsReset(loadedBuckets)
 
-    // function to load buckets at index counter
-
-    // unloadBucketsReset
-    // store new array
     counter += 1
-    return radixSort(array, counter)
+    return radixSort(newArray, counter)
   } else {
   	return array
   }
 }
 
-// need to figure out how to determine which digits place currently on
-
-// need to figure out how to determine when to stop recursive process (if only #s of 3 digits, no need to check 4th digit in list)
-
-// unload buckets, create new array
-
-// radixSort(toSort, 0)
+radixSort(toSort, 0)
