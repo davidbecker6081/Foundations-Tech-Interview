@@ -5,6 +5,20 @@ const findLargestNumber = (array) => {
 	return largestNum.toString().length
 }
 
+const convertArrayToString = (array, max) => {
+	return array.map((num) => {
+		num = num.toString()
+		if (num.toString().length < max) {
+			const numOfZeros = max - num.toString().length
+			for (let j = 0; j < numOfZeros; j++) {
+				num = '0' + num
+			}
+		}
+
+		return num
+	})
+}
+
 const unloadBucketsReset = (buckets) => {
   const newArray = []
 
