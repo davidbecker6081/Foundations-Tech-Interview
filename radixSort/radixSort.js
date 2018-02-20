@@ -8,41 +8,38 @@ const findLargestNumberLength = (array) => {
 const convertArrayToString = (array, maxLength) => {
 	return array.map((num) => {
 		const numOfZerosToAdd = maxLength - num.toString().length
-			for (let j = 0; j < numOfZerosToAdd; j++) {
-				num = '0' + num
-			}
+		for (let j = 0; j < numOfZerosToAdd; j++) {
+			num = '0' + num
+		}
 		return num.toString()
 	})
 }
 
 const unloadBucketsAndReset = (buckets) => {
-  const newArray = []
-
-  for (let i = 0; i < 10; i++) {
-    if (buckets[i].length) {
-      for (let j = 0; j < buckets[i].length; j++) {
-      	newArray.push(buckets[i][j])
-  		}
-    }
-  }
-
-  return newArray
+	const newArray = []
+	for (let i = 0; i < 10; i++) {
+		if (buckets[i].length) {
+			for (let j = 0; j < buckets[i].length; j++) {
+				newArray.push(buckets[i][j])
+			}
+		}
+	}
+	return newArray
 }
 
 const loadBuckets = (array, digitsPlace) => {
 	const buckets = {
-  		'0': [],
-  		'1': [],
-  		'2': [],
-  		'3': [],
-  		'4': [],
-  		'5': [],
-  		'6': [],
-  		'7': [],
-  		'8': [],
-  		'9': []
-  }
-
+		'0': [],
+		'1': [],
+		'2': [],
+		'3': [],
+		'4': [],
+		'5': [],
+		'6': [],
+		'7': [],
+		'8': [],
+		'9': []
+	}
 	return array.reduce((loadedBuckets, num) => {
 		loadedBuckets[num[digitsPlace]].push(num)
 		return loadedBuckets
@@ -52,22 +49,21 @@ const loadBuckets = (array, digitsPlace) => {
 const convertArrayToIntegers = (array) => array.map(num => parseInt(num))
 
 const radixSort = (array, counter = 0) => {
-  let largestNumDigits = findLargestNumberLength(array)
-  let stringArray = array
+	let largestNumDigits = findLargestNumberLength(array)
+	let stringArray = array
 
-  if (counter === 0) {
-  	stringArray = convertArrayToString(array, largestNumDigits)
-  }
+	if (counter === 0) {
+		stringArray = convertArrayToString(array, largestNumDigits)
+	}
+	if (counter !== largestNumDigits) {
+		const currentDigitsPlace = largestNumDigits - counter - 1
+		const loadedBuckets = loadBuckets(stringArray, currentDigitsPlace)
+		const newArray = unloadBucketsAndReset(loadedBuckets)
 
-  if (counter !== largestNumDigits) {
-  	const currentDigitsPlace = largestNumDigits - counter - 1
-    const loadedBuckets = loadBuckets(stringArray, currentDigitsPlace)
-    const newArray = unloadBucketsAndReset(loadedBuckets)
-
-    return radixSort(newArray, counter += 1)
-  } else {
-  	return convertArrayToIntegers(stringArray)
-  }
+		return radixSort(newArray, counter += 1)
+	} else {
+		return convertArrayToIntegers(stringArray)
+	}
 }
 
 radixSort(toSort)
